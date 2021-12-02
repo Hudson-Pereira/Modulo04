@@ -1,5 +1,5 @@
 export class CreateFilmeDto {
-  name: String;
-  ano: Number;
-  capa: String;
+  name: string;
+  ano: number;
+  capa: string;
 }
