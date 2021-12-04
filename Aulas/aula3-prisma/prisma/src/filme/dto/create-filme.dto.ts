@@ -7,11 +7,18 @@ export class CreateFilmeDto {
   @IsString()
   name: string;
 
-  @IsNotEmpty()
   @IsInt()
   ano: number;
 
   @IsNotEmpty()
   @IsString()
   capa: string;
+
+  @IsNotEmpty()
+  @IsString()
+  genero: string;
+
+  @IsNotEmpty()
+  @IsInt()
+  generoid: number;
 }

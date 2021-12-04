@@ -13,4 +13,13 @@ model Filme {
   name          String    @unique //garantir que so vai ter um dado com essas informacoes.
   ano           Int?    
   capa          String 
+  genero        Genero    @relation(fields: [generoid], references: [id])
+  generoid      Int    
+}
+
+model Genero {
+  id            Int        @default(autoincrement()) @id
+  name          String 
+  filmes        Filme[]
+  
 }
