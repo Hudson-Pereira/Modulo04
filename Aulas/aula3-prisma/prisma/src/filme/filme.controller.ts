@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { FilmeService } from './filme.service';
 import { CreateFilmeDto } from './dto/create-filme.dto';
 import { UpdateFilmeDto } from './dto/update-filme.dto';
@@ -9,26 +17,26 @@ export class FilmeController {
 
   @Post()
   create(@Body() createFilmeDto: CreateFilmeDto) {
-    return this.filmeService.create(createFilmeDto);
+    return this.filmeService.createPrisma(createFilmeDto);
   }
 
   @Get()
   findAll() {
-    return this.filmeService.findAll();
+    return this.filmeService.findAllPrisma();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.filmeService.findOne(+id);
+    return this.filmeService.findOnePrisma(+id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateFilmeDto: UpdateFilmeDto) {
-    return this.filmeService.update(+id, updateFilmeDto);
+    return this.filmeService.updatePrisma(+id, updateFilmeDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.filmeService.remove(+id);
+    return this.filmeService.removePrisma(+id);
   }
 }
