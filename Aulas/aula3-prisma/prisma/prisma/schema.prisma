@@ -9,7 +9,7 @@ datasource db {
 
 model Filme {
 //nome          tipo         definicioes
-  id            Int       @default(autoincrement()) @id //padrao definido automatico
+  id            Int       @default(autoincrement()) @id @unique//padrao definido automatico
   name          String    @unique //garantir que so vai ter um dado com essas informacoes.
   ano           Int?    
   capa          String 
@@ -18,7 +18,7 @@ model Filme {
 }
 
 model Genero {
-  id            Int        @default(autoincrement()) @id
+  id            Int        @default(autoincrement()) @id @unique
   name          String 
   filmes        Filme[]
   

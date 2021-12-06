@@ -1,8 +1,6 @@
 import { IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateFilmeDto {
-  id: number;
-
   @IsNotEmpty()
   @IsString()
   name: string;
@@ -13,10 +11,6 @@ export class CreateFilmeDto {
   @IsNotEmpty()
   @IsString()
   capa: string;
-
-  @IsNotEmpty()
-  @IsString()
-  genero: string;
 
   @IsNotEmpty()
   @IsInt()
