@@ -12,4 +12,8 @@ export class CreateParticipanteDto {
   @IsNotEmpty()
   @IsInt()
   ano: number;
+
+  @IsNotEmpty()
+  @IsInt()
+  filmeid: number;
 }

@@ -14,7 +14,8 @@ model Filme {
   ano           Int?    
   capa          String 
   genero        Genero    @relation(fields: [generoid], references: [id])
-  generoid      Int    
+  generoid      Int  
+  participantes Participante[]  
 }
 
 model Genero {
@@ -27,5 +28,7 @@ model Participante {
   id            Int        @default(autoincrement()) @id @unique
   name          String
   genero        String?
-  ano          Int  
+  ano           Int  
+  filmes        Filme      @relation(fields: [filmeid], references: [id])
+  filmeid       Int
 }
