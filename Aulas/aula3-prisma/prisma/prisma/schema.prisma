@@ -21,5 +21,11 @@ model Genero {
   id            Int        @default(autoincrement()) @id @unique
   name          String 
   filmes        Filme[]
-  
+}
+
+model Participante {
+  id            Int        @default(autoincrement()) @id @unique
+  name          String
+  genero        String?
+  ano          Int  
 }
