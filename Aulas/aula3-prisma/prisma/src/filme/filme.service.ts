@@ -1,17 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from './../prisma/prisma.service';
-import { Filme } from '@Prisma/client';
-import { CreateFilmeDto } from './dto/create-filme.dto';
-
-const filmes = [];
+import { Filme, Prisma } from '@Prisma/client';
+import { UpdateFilmeDto } from './dto/update-filme.dto';
 
 @Injectable()
 export class FilmeService {
   constructor(private prisma: PrismaService) {}
 
-  async createPrisma(createFilmeDto: CreateFilmeDto): Promise<Filme> {
-    return await this.prisma.filme.create({ data: { ...createFilmeDto } });
+  async createPrisma(data: Prisma.FilmeUncheckedCreateInput): Promise<Filme> {
+    return await this.prisma.filme.create({ data });
   }
+
+  // async createPrisma(createFilmeDto: CreateFilmeDto): Promise<Filme> {
+  //   return await this.prisma.filme.create({ data: { ...createFilmeDto } });
+  // }
 
   async findAllPrisma(): Promise<Filme[]> {
     return await this.prisma.filme.findMany();
@@ -21,9 +23,9 @@ export class FilmeService {
     return await this.prisma.filme.findUnique({ where: { id } });
   }
 
-  async updatePrisma(id: number, updateFilmeDto): Promise<Filme> {
+  async updatePrisma(id: number, data: UpdateFilmeDto): Promise<Filme> {
     return await this.prisma.filme.update({
-      data: { ...updateFilmeDto },
+      data,
       where: { id },
     });
   }

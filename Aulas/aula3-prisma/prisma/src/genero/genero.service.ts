@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from './../prisma/prisma.service';
-import { Genero } from '@Prisma/client';
-import { CreateGeneroDto } from './dto/create-genero.dto';
+import { Genero, Prisma } from '@Prisma/client';
+import { UpdateGeneroDto } from './dto/update-genero.dto';
 
 @Injectable()
 export class GeneroService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createGeneroDto: CreateGeneroDto): Promise<Genero> {
-    return await this.prisma.genero.create({ data: { ...createGeneroDto } });
+  async create(data: Prisma.GeneroCreateInput): Promise<Genero> {
+    return await this.prisma.genero.create({ data });
   }
 
   async findAll(): Promise<Genero[]> {
@@ -19,9 +19,9 @@ export class GeneroService {
     return await this.prisma.genero.findUnique({ where: { id } });
   }
 
-  async update(id: number, updateGeneroDto): Promise<Genero> {
+  async update(id: number, data: UpdateGeneroDto): Promise<Genero> {
     return await this.prisma.genero.update({
-      data: { ...updateGeneroDto },
+      data,
       where: { id },
     });
   }
