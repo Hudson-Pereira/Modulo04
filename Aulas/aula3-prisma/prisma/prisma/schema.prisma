@@ -15,7 +15,7 @@ model Filme {
   capa          String 
   genero        Genero    @relation(fields: [generoid], references: [id])
   generoid      Int  
-  participantes Participante[]  
+  participantes ParticipantesOnFilmes[]  
 }
 
 model Genero {
@@ -28,7 +28,15 @@ model Participante {
   id            Int        @default(autoincrement()) @id @unique
   name          String
   genero        String?
-  ano           Int  
-  filmes        Filme      @relation(fields: [filmeid], references: [id])
-  filmeid       Int
+  ano           Int
+  filmes        ParticipantesOnFilmes[]
+}
+
+model ParticipantesOnFilmes { //tabela de relacao explicita many to many
+  filme         Filme     @relation(fields: [filmeid], references: [id])
+  filmeid       Int 
+  participante  Participante     @relation(fields: [participanteid], references: [id])
+  participanteid      Int
+
+  @@id([filmeid, participanteid]) //criando id dos dados da tabela many to many
 }
