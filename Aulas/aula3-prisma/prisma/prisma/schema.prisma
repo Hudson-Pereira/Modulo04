@@ -13,15 +13,16 @@ model Filme {
   name          String    @unique //garantir que so vai ter um dado com essas informacoes.
   ano           Int?    
   capa          String 
-  genero        Genero    @relation(fields: [generoid], references: [id])
-  generoid      Int  
+  // genero        Genero    @relation(fields: [generoid], references: [id])
+  // generoid      Int  
+  genero        GeneroOnFilme[]
   participantes ParticipantesOnFilmes[]  
 }
 
 model Genero {
   id            Int        @default(autoincrement()) @id @unique
   name          String 
-  filmes        Filme[]
+  filmes        GeneroOnFilme[]
 }
 
 model Participante {
@@ -37,6 +38,19 @@ model ParticipantesOnFilmes { //tabela de relacao explicita many to many
   filmeid       Int 
   participante  Participante     @relation(fields: [participanteid], references: [id])
   participanteid      Int
+  assignedAt    DateTime @default(now())
+  assignedBy    String
 
   @@id([filmeid, participanteid]) //criando id dos dados da tabela many to many
+}
+
+model GeneroOnFilme {
+  filme         Filme     @relation(fields: [filmeid], references: [id])
+  filmeid       Int 
+  genero        Genero    @relation(fields: [generoid], references: [id])
+  generoid      Int  
+  assignedAt    DateTime @default(now())
+  assignedBy    String
+
+  @@id([filmeid, generoid])
 }
